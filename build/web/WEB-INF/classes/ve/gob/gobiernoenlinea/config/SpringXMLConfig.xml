@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+
+<bean id="MonitorWeb" class="ve.gob.gobiernoenlinea.monitor.MonitorWeb"/>
+    
+    <!-- Mi Tareas -->
+    <bean id="cron" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> 
+          <property name="targetObject" ref="MonitorWeb" />
+          <property name="targetMethod" value="Monitor" />
+          <property name="concurrent" value="false" /> 
+    </bean>
+    <!-- Mi Tareas, corre cada 20 segundos -->
+    <bean id="triggerTarea" class="org.springframework.scheduling.quartz.CronTriggerBean">
+	  <property name="jobDetail" ref="cron"/>
+	  <property name="cronExpression" value="0 0 0/2 1/1 * ? *"/> <!--  Firmado Cada 2 horas  -->
+	</bean> 
+	
+    <!-- Mi trigger, que ejecutan la tarea-->
+    
+    <bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+    <property name="triggers">
+      <list>
+            <ref bean="triggerTarea" />
+      </list>
+    </property>
+ </bean>
+
+
+
+
+
+
+
+
+
+</beans>
