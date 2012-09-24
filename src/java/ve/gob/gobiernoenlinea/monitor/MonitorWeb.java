@@ -56,10 +56,10 @@ public class MonitorWeb
                  }
             catch (Exception e){
             message.setSubject(propiedades.getProperty("subject"));
-            message.setText("Hola, Soy un Monitor de la web Gobierno en linea ");
+            message.setText(propiedades.getProperty("msjText"));
             // Lo enviamos.
             Transport t = session.getTransport("smtp");
-            t.connect("probadoaplicacion@gmail.com", "aplicacion");
+            t.connect(propiedades.getProperty("connectCorreo"), propiedades.getProperty("connectContrasena"));
             t.sendMessage(message, message.getAllRecipients());
             // Cierre.
             t.close();
