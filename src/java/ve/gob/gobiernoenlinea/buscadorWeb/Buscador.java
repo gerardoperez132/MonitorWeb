@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import ve.gob.gobiernoenlinea.config.properties;
+import java.util.Properties;
 
 /**
  *
@@ -18,15 +20,15 @@ public class  Buscador{
  String FinalHtml = "</html>";
  String FinalBody = "</body>";
  String datosEncontrados ;
- String urlEnte = "http://gobiernoenlinea.gob.ve/";
+ Properties propiedades = new properties().getProperties();//Declaro el objeto q contiene los valores de mis propiedades
+ String urlEnte = propiedades.getProperty("urlEnte");
     
         URL url = new URL(urlEnte);
         BufferedReader webEnteGobierno = new BufferedReader(new InputStreamReader(url.openStream()));
         StringBuffer datos = new StringBuffer();
         
        while ((datos.append(webEnteGobierno.readLine())) != null) {
-        //StringBuffer datos = new StringBuffer();
-       // System.out.println("Antes de entrar al ciclo");
+           
         datos.append(webEnteGobierno.readLine()) ;
             
                 datos = new StringBuffer(datos);                 

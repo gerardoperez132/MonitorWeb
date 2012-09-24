@@ -20,7 +20,7 @@
     <!-- Mi Tareas, corre cada 20 segundos -->
     <bean id="triggerTarea" class="org.springframework.scheduling.quartz.CronTriggerBean">
 	  <property name="jobDetail" ref="cron"/>
-	  <property name="cronExpression" value="0 0 0/2 1/1 * ? *"/> <!--  Firmado Cada 2 horas  -->
+	  <property name="cronExpression" value="0 0/1 * 1/1 * ? *"/> <!--  0 0 0/2 1/1 * ? *   Firmado Cada 2 horas  -->
 	</bean> 
 	
     <!-- Mi trigger, que ejecutan la tarea-->
